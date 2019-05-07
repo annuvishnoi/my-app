@@ -1,0 +1,15 @@
+hr.style1 {
+	border-top: 2px solid #8c8b8b;
+}
+hr.style2 {
+	background-color: #fff;
+	border-top: 2px dotted #8c8b8b;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+.btn-color {
+ 
+    background-color: #DDDDDD
+}

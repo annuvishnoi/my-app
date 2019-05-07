@@ -25,7 +25,6 @@ export class SearchProjectComponent {
   }
  
   listClick(event, newValue) {
-    console.log(newValue);
     this.selectedItem = newValue; 
   }
 }

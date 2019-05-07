@@ -58,20 +58,20 @@ export class AddTaskComponent implements OnInit {
   fetchSelectedTaskById() {
     this.loading = true;
       this.taskService.getTaskByTaskId(this.selectedTaskId).subscribe((response) =>{
-        console.log("Task fetch successfully>>", response);       
+        
         this.selectedTaskModal = response;
         this.fetchSelectedProject(this.selectedTaskModal.projectId);
         this.isvalidTaskId = true;
         this.loading = false;
       }, error => {
-        console.log("error occured>>");    
+        
         this.isvalidTaskId = false;    
         this.loading = false;
       });
   }
   fetchSelectedProject(projectId) {
     this.projectService.getProjectById(projectId).subscribe((response) =>{
-      console.log("Project fetch successfully>>", response);       
+      
       this.selectedTaskModal.selectedProject = response;
       if(this.selectedTaskModal && (this.selectedTaskModal.selectedParentTask == null)) {
         let blankParentTask = {
@@ -83,7 +83,7 @@ export class AddTaskComponent implements OnInit {
       this.taskModal = this.selectedTaskModal;
       this.loading = false;
     }, error => {
-      console.log("error occured>>");        
+      
       this.loading = false;
     });
   }
@@ -121,7 +121,7 @@ export class AddTaskComponent implements OnInit {
       selectedEmployee : blankEmployee
     };
 
-    console.log(">>taskModal>>", this.taskModal);
+    
   }
   searchParentTask() {
     this.getParentTasks();
@@ -130,7 +130,7 @@ export class AddTaskComponent implements OnInit {
 
     this.loading = true;    
     this.parentTaskService.getParentTasks().subscribe((response) =>{
-      console.log("Parent Task fetch successfully>>");       
+      
       this.loading = false;    
       this.parentTasks = response;      
       this.modelRef = this.modalService.openParentTaskSearchPopUp(
@@ -140,7 +140,7 @@ export class AddTaskComponent implements OnInit {
 
     }, error => {    
       this.loading = false;     
-      console.log("error occured>>");
+      
       this.redirectAfterSave("Please add Parent Task first!!", () => { }, 
           this.code2text.transform("successTitle"));
     });
@@ -148,7 +148,7 @@ export class AddTaskComponent implements OnInit {
 
   selectedParentTask(obj) {
     this.modelRef.hide();
-    console.log("obj>>", obj.selectedItem);
+    
     this.taskModal.selectedParentTask = obj.selectedItem;  
     this.taskModal.parentId = obj.selectedItem.parentId;
   }
@@ -158,13 +158,13 @@ export class AddTaskComponent implements OnInit {
   getEmployees() {
     this.loading = true;    
     this.userService.getUsers().subscribe((response) =>{
-      console.log("User fetch successfully>>");      
+      
       this.loading = false;     
       this.employees = response;      
       this.modelRef = this.modalService.openSearchPopUp(this.employees, "Search Employee", (obj) => { this.selectedEmployee(obj); },"Select");
     }, error => {     
       this.loading = false;    
-      console.log("error occured>>");
+      
       this.redirectAfterSave("Please add the User first!!", () => { }, 
           this.code2text.transform("successTitle"));
     });
@@ -172,7 +172,7 @@ export class AddTaskComponent implements OnInit {
   
   selectedEmployee(obj) {
     this.modelRef.hide();
-    console.log("obj>>", obj.selectedItem);
+    
     this.taskModal.selectedEmployee = obj.selectedItem;  
   }
   searchProject() {    
@@ -181,7 +181,7 @@ export class AddTaskComponent implements OnInit {
   getProjects() {
     this.loading = true;    
     this.projectService.getProjects().subscribe((response) =>{
-      console.log("Projects fetch successfully>>");  
+      
       this.loading = false;         
       this.projects = response;      
       this.modelRef = this.modalService.openProjectSearchPopUp(
@@ -191,18 +191,18 @@ export class AddTaskComponent implements OnInit {
 
     }, error => {     
       this.loading = false;    
-      console.log("error occured>>");
+      
       this.redirectAfterSave("Please add the Project first!!", () => { }, 
           this.code2text.transform("successTitle"));
     });
   }
   selectedProject(obj) {
     this.modelRef.hide();
-    console.log("obj>>", obj.selectedItem);
+    
     this.taskModal.selectedProject = obj.selectedItem;  
   }
   onSubmit() {
-    console.log(this.taskModal);
+    
     if(this.taskModal) {
       if(this.taskModal.setParent) {
         this.saveParentTask();

@@ -42,7 +42,7 @@ export class ViewTaskComponent implements OnInit {
       this.loading = false;
     }, error => {
       this.loading = false;
-      console.log("error occured>>");
+      
     });
   }
   sort(property) {
@@ -59,7 +59,7 @@ export class ViewTaskComponent implements OnInit {
         return 0;
       }
     });
-    console.log(">>sorted>>", this.tasks);
+    
   };
 
   
@@ -67,13 +67,13 @@ export class ViewTaskComponent implements OnInit {
     this.loading = true;
     this.taskService.updateTaskStatus(taskDetails.taskId).subscribe((response) => {
       this.loading = false;
-      console.log("Task ended successfully>>");
+      
       this.redirectAfterSave("Task ended successfully", () => { }, "Success");
       this.getTasks('');
     }, error => {
       
       this.loading = false;
-      console.log("error occured>>");
+      
     });
   }
   redirectAfterSave(popMesg, confirmCallback, popTitle) {
@@ -89,7 +89,7 @@ export class ViewTaskComponent implements OnInit {
   getProjects() {
     this.loading = true;    
     this.projectService.getProjects().subscribe((response) =>{
-      console.log("Projects fetch successfully>>");  
+      
       this.loading = false;         
       this.projects = response;      
       this.modelRef = this.modalService.openProjectSearchPopUp(
@@ -99,14 +99,14 @@ export class ViewTaskComponent implements OnInit {
 
     }, error => {     
       this.loading = false;    
-      console.log("error occured>>");
+      
       this.redirectAfterSave("Please add the Project first!!", () => { }, 
           this.code2text.transform("successTitle"));
     });
   }
   getSelectedProject(obj) {
     this.modelRef.hide();
-    console.log("obj>>", obj.selectedItem);
+    
     this.selectedProject = obj.selectedItem;  
     this.tasks = obj.selectedItem.tasks;
     //this.tasks = this.tasks.filter(task => task.status != "0");

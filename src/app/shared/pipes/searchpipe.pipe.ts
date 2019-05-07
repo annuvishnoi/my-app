@@ -13,7 +13,6 @@ export class SearchPipe implements PipeTransform {
             return items;
         }
         searchText = searchText.toLowerCase();
-        console.log("searchText>>", searchText);
         let filterItems = [];
         filterItems = items.filter(it => {     
             var properties = Object.keys(it);
@@ -25,7 +24,6 @@ export class SearchPipe implements PipeTransform {
             }); 
             return found;     
           });
-        console.log("filter>>", filterItems);
         return filterItems;
     }
 }

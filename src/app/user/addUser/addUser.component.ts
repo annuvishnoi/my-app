@@ -30,27 +30,26 @@ export class AddUserComponent implements OnInit {
   }
   
   onSubmit() {
-    console.log(this.employee);
     this.loading = true;
     if(this.employee && this.employee.userId) {
       this.userService.updateUser(this.employee.userId, this.employee).subscribe((response) =>{
-        console.log("User update successfully>>");       
+               
         this.loading = false;
         this.redirectAfterSave("User updated successfully", () => {this.reset()}, "Success");
         this.addEvent.emit();
       }, error => {
-        console.log("error occured>>");        
+            
         this.loading = false;
         this.redirectAfterSave("Error occured..", () => {}, "Error");
       });
     } else {
       this.userService.saveUser(this.employee).subscribe((response) =>{
-        console.log("User save successfully>>");  
+        
         this.loading = false;     
         this.redirectAfterSave("User Saved successfully", () => {this.reset()}, "Success");
         this.addEvent.emit();
       }, error => {
-        console.log("error occured>>");       
+         
         this.loading = false; 
         this.redirectAfterSave(error.error.message, () => {}, "Error");
       });

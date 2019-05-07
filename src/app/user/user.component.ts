@@ -30,12 +30,12 @@ export class UserComponent implements OnInit {
   getEmployees(evt) {
     this.loading = true;
     this.userService.getUsers().subscribe((response) =>{
-      console.log("User fetch successfully>>");       
+      
       this.employees = response || [];
       this.loading = false;
     }, error => {
       this.loading = false;
-      console.log("error occured>>");
+      
     });
   }
   sort(property){
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
             return 0;
         }
     });
-    console.log(">>sorted>>", this.employees);
+    
 };
 
 editEmployee(employeeObj) {
@@ -60,11 +60,11 @@ editEmployee(employeeObj) {
 }
 deleteEmployee(employeeObj) {
     this.userService.deleteUser(employeeObj.userId).subscribe((response) =>{
-        console.log("User deleted successfully>>");   
+        
         this.redirectAfterSave("User deleted successfully", () => {}, "Success");    
         this.getEmployees('');
       }, error => {
-        console.log("error occured>>");        
+        
         
       });
 }

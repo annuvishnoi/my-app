@@ -32,13 +32,13 @@ export class ProjectComponent implements OnInit {
   getProjects(evt) {
     this.loading = true;
     this.projectService.getProjects().subscribe((response) => {
-      console.log("Project fetch successfully>>");
+      
       this.projectList = response;
       this.calculateNoOfTaskandCompletedTask();
       this.loading = false;
     }, error => {
       this.loading = false;
-      console.log("error occured>>");
+      
     });
     
   }
@@ -66,7 +66,7 @@ export class ProjectComponent implements OnInit {
         return 0;
       }
     });
-    console.log(">>sorted>>", this.projectList);
+    
   };
 
   
@@ -74,7 +74,7 @@ export class ProjectComponent implements OnInit {
     this.loading = true;
     this.projectService.deleteProject(projectDetailObj.projectId).subscribe((response) => {
       this.loading = false;
-      console.log("Project deleted successfully>>");
+      
       this.redirectAfterSave(this.code2text.transform("msgProjectDelete"), () => { }, 
         this.code2text.transform("successTitle"));
       this.getProjects('');
@@ -83,7 +83,7 @@ export class ProjectComponent implements OnInit {
       this.redirectAfterSave("Error occured", () => { }, "Error");
       this.redirectAfterSave(this.code2text.transform("msgError"), () => { }, 
         this.code2text.transform("errorTitle"));
-      console.log("error occured>>");
+      
     });
   }
   redirectAfterSave(popMesg, confirmCallback, popTitle) {

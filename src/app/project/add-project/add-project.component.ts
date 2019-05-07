@@ -42,7 +42,7 @@ export class AddProjectComponent implements OnInit {
       this.translate.use(this.lang);
     }
     this.createBlankModal();
-    console.log(">>project>>", this.projectModal);
+    
   }
   createBlankModal() {
     let todayDate = moment().format("YYYY-MM-DD");
@@ -65,7 +65,7 @@ export class AddProjectComponent implements OnInit {
       setDate : false,
       selectedEmployee : blankEmployee
     }
-    console.log(">>project>>", this.projectModal);
+    
   }
   searchEmployee() {
     this.getEmployees();
@@ -73,12 +73,12 @@ export class AddProjectComponent implements OnInit {
   }
   getEmployees() {
     this.userService.getUsers().subscribe((response) =>{
-      console.log("User fetch successfully>>");       
+      
       this.employees = response;      
       let searchEmpText = this.code2text.transform("lblSearchUser");
       this.modelRef = this.modalService.openSearchPopUp(this.employees, searchEmpText, (obj) => { this.selectedEmployee(obj); },"Select");
     }, error => {     
-      console.log("error occured>>");
+      
       this.redirectAfterSave("Please add the User first!!", () => { }, 
           this.code2text.transform("successTitle"));
     });
@@ -86,34 +86,34 @@ export class AddProjectComponent implements OnInit {
   
   selectedEmployee(obj) {
     this.modelRef.hide();
-    console.log("obj>>", obj.selectedItem);
+    
     this.projectModal.selectedEmployee = obj.selectedItem;  
   }
   onSubmit() {
-    console.log(this.projectModal);
+    
     this.loading = true;
     if(this.projectModal && this.projectModal.projectId) {
       this.projectService.updateProject(this.projectModal.projectId, this.projectModal).subscribe((response) =>{
-        console.log("Project update successfully>>");       
+        
         this.loading = false;
         this.redirectAfterSave(this.code2text.transform("msgProjectUpdate"), () => {this.reset()}, 
           this.code2text.transform("successTitle"));
         this.addEvent.emit();
       }, error => {
-        console.log("error occured>>");        
+        
         this.loading = false;
         this.redirectAfterSave(this.code2text.transform("msgError"), () => { }, 
           this.code2text.transform("errorTitle"));
       });
     } else {
       this.projectService.saveProject(this.projectModal).subscribe((response) =>{
-        console.log("Project save successfully>>");  
+        
         this.loading = false;     
         this.redirectAfterSave(this.code2text.transform("msgProjectSave"), () => {this.reset()}, 
           this.code2text.transform("successTitle"));
         this.addEvent.emit();
       }, error => {
-        console.log("error occured>>");       
+        
         this.loading = false; 
         this.redirectAfterSave(this.code2text.transform("msgError"), () => { }, 
           this.code2text.transform("errorTitle"));

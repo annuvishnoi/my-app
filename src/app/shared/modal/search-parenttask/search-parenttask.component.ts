@@ -25,7 +25,7 @@ export class SearchParenttaskComponent {
   }
  
   listClick(event, newValue) {
-    console.log(newValue);
+    
     this.selectedItem = newValue; 
   }
 }

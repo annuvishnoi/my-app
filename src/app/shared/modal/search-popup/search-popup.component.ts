@@ -26,13 +26,8 @@ export class SearchPopupComponent {
         this.confirmCallback(this);
     }
   }
-  /* passBack() {
-    console.log(">>passBack>>");
-    this.bsModalRef.hide();
-    this.passEntry.emit(this.selectedItem);
-  } */
+ 
   listClick(event, newValue) {
-    console.log(newValue);
     this.selectedItem = newValue;  // don't forget to update the model here
     // ... do other stuff here ...
   }
